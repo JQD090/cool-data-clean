@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>制冷系统运行分析报告</title>
+    <style>
+      body {
+        font-family: SimHei, Arial, sans-serif;
+        margin: 40px;
+        line-height: 1.6;
+      }
+      h1 {
+        color: #2e7d32;
+      }
+      h2 {
+        color: #388e3c;
+      }
+      .section {
+        margin: 20px 0;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .plot {
+        max-width: 100%;
+        margin: 20px 0;
+      }
+      .suggestion {
+        background: #e8f5e9;
+        padding: 15px;
+        margin: 10px 0;
+        border-left: 4px solid #4caf50;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>制冷系统运行分析报告</h1>
+    <p>生成时间：{{ generation_time }}</p>
+    <div class="section">
+      <h2>1. 数据质量分析</h2>
+      {% if plots.data_quality %}
+      <img class="plot" src="{{ plots.data_quality }}" alt="数据质量分析图" />
+      {% endif %}
+    </div>
+    <div class="section">
+      <h2>2. 异常检测结果</h2>
+      {% if plots.anomalies %}
+      <img class="plot" src="{{ plots.anomalies }}" alt="异常检测结果图" />
+      {% endif %}
+    </div>
+    <div class="section">
+      <h2>3. 稳态识别结果</h2>
+      {% if plots.steady_states %}
+      <img class="plot" src="{{ plots.steady_states }}" alt="稳态识别结果图" />
+      {% endif %}
+    </div>
+    <div class="section">
+      <h2>4. 运行模式分析</h2>
+      {% if plots.operations %}
+      <img class="plot" src="{{ plots.operations }}" alt="运行模式分析图" />
+      {% endif %}
+    </div>
+    <div class="section">
+      <h2>5. 运行建议</h2>
+      {% for suggestion in suggestions %}
+      <div class="suggestion">{{ suggestion }}</div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
